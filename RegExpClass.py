@@ -3,10 +3,12 @@ class RegExp:
     letter = ""
     k = 0
 
+
     def __init__(self, regexp, letter, k):
         self.regexp = regexp
         self.letter = letter
         self.k = k
+
 
     def star_operator(self, rem_set, stack):
         new_set = set(rem_set)
@@ -19,8 +21,10 @@ class RegExp:
 
         stack.append(new_set)
 
+
     def or_operator(self, set1, set2, stack):
         stack.append(set1 | set2)
+
 
     def point_operator(self, rem1_set, rem2_set, stack):
         _set = set()
@@ -28,6 +32,7 @@ class RegExp:
             for el2 in rem2_set:
                 _set.add((el1 + el2) % self.k)
         stack.append(_set)
+
 
     def parse(self):
         stack = []
@@ -51,4 +56,3 @@ class RegExp:
                     else:
                         self.or_operator(operand1, operand2, stack)
         return 0 in stack[0]
-
